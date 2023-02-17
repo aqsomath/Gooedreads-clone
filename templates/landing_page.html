@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-2">
+
+    </div>
+    <div class="col-sm-8">
+        <h1>Welcome to Goodreads</h1>
+        <hr style="color:brown;">
+    </div>
+    <div class="col-sm-2">
+
+    </div>
+</div>
+
+<div class="row">
+        <div class="col mt-5">
+            <h3>
+                 <b>Comedy</b>
+            </h3>
+
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="width:150;height:200;">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+
+                  <img src="{{ book1.cover_picture.url }}" class="d-block w-100" alt="...">
+
+                </div>
+                <div class="carousel-item">
+                  <img src="{{ book2.cover_picture.url }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{ book1.cover_picture.url }}" class="d-block w-100" alt="...">
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="col mt-3">
+            <h3>
+                <b>Tragedy</b>
+            </h3>
+
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel " style="width:200px;height:250px;">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{{ book2.cover_picture.url }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{ book2.cover_picture.url }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{ book1.cover_picture.url }}" class="d-block w-100" alt="...">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+        </div>
+        <div class="col mb-2 mt5">
+            <h3>
+                <b>Historical</b>
+            </h3>
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{{ book1.cover_picture.url }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{ book2.cover_picture.url }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{ book1.cover_picture.url }}" class="d-block w-100" alt="...">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+        </div>
+        <div class="col">
+            <h3>
+                <b>Science</b>
+            </h3>
+
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="width:100px;height:150px;">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{{ book1.cover_picture.url }}" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="{{ book2.cover_picture.url }}" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Second slide label</h5>
+                    <p>Some representative placeholder content for the second slide.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="{{ book1.cover_picture.url }}" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Third slide label</h5>
+                 </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+        </div>
+</div>
+
+
+{% if messages %}
+ {% for message in messages %}
+     <p>{{ message }}</p>
+ {% endfor %}
+{% endif %}
+
+
+{% endblock %}

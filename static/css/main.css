@@ -1,0 +1,27 @@
+
+
+
+
+.profile_pic {
+                        height:200px;
+                        width:200px;
+                        border-radius:50%;
+                      }
+
+.cover_pic {
+            height:200px;
+            width:200px;
+            margin:10px;
+            }
+
+
+.hash {
+        text-align:center;
+        font-family:sans-serif;
+        font-size:25px;
+        background-color: #F0F8FF;
+        color:white;
+
+}
+
+

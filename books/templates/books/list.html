@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <div class="row mb-3">
+        <div class="col-4">
+
+            <form class="d-flex mt-3" method="get">
+                <input class="form-control me-2" type="text" placeholder="search" name="q" value="{{ search_query }}">
+                <button class="btn btn-success"> Search </button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+{% if page_obj %}
+ {% for book in page_obj %}
+    <div class="bg-light">
+            <div class="container ">
+                    <div class="row">
+
+                        <div class="col-sm-3">
+                            <img class="cover_pic" src="{{ book.cover_picture.url }}">
+
+                        </div>
+                        <div class="col-sm-6">
+                            <h2>
+
+                                <a href="{% url 'books:detail' book.id %}">{{ book.title }}</a>
+                            </h2>
+                            <p>
+                                {{ book.description | slice:":300" }}..
+                            </p>
+                            <a href="{% url 'books:detail' book.id %}">
+                                Add comment
+                            </a>
+
+
+<!--                            <div class="dropdown">-->
+<!--                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toogle="dropdown" aria-expanded="false">-->
+<!--                                    Review-->
+<!--                                </button>-->
+<!--                                <ul class="dropdown-menu">-->
+<!--                                        {% for review in book.bookreview_set.all %}-->
+<!--                                          <li class="dropdown-item">-->
+<!--                                               <div class="row">-->
+<!--                                                        <div class="col-1">-->
+<!--                                                           <img class="review_pic" style="width:50px;height:50px;border-radius:50%;" src="{{ review.user.profile_picture.url }}">-->
+<!--                                                        </div>-->
+<!--                                                        <div class="col-7">-->
+<!--                                                            <b>{{ review.user.username }}</b> rated {{ review.stars_given }} star <span class="fw-lighter">{{ review.created_at }}</span>-->
+<!--                                                            <p class="mb-5">-->
+<!--                                                                 {{ review.comment }}-->
+<!--                                                            </p>-->
+
+<!--                                                        </div>-->
+<!--                                                </div>-->
+<!--                                          </li>-->
+<!--                                        {% endfor %}-->
+<!--                                </ul>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="col-sm-3">
+                                {% for review in book.bookreview_set.all %}
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <img src="{{ review.user.profile_picture.url }}" style="height:30px;width:30px;border-radius:50%;">
+
+                                            <br>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <b>
+                                                    {{ review.user.username }}
+                                                </b>
+                                            {% if review.stars_given == 1 %}
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                            {% endif %}
+                                            {% if review.stars_given == 2 %}
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                            {% endif %}
+                                            {% if review.stars_given == 3 %}
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                            {% endif %}
+                                            {% if review.stars_give == 4 %}
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style=""></i>
+                                            {% endif %}
+                                            {% if review.stars_given == 5 %}
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+
+                                                    <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                                        {% endif %}
+                                            <p style="font-size:12px;">
+                                                {{ review.comment }}
+                                            </p>
+
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+
+                        </div>
+
+                    </div>
+            </div>
+    </div>
+ {% endfor %}
+
+
+<nav>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                {% endif %}
+
+                <li class="page-item active">
+                    <a href="#" class="page-link">{{ page_obj.number }}</a>
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+{% else %}
+No found book
+{% endif %}
+
+{% endblock %}

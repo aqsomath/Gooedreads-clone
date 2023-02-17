@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.username == 'math' %}
+<a href="{% url 'books:create' %}">Create Book</a> | <a href="{% url 'books:confirm' book.id %}">Delete this book</a>
+{% endif %}
+<div class="row">
+    <div class="col-sm-3">
+        <img class="cover_pic" src="{{ book.cover_picture.url }}">
+    </div>
+    <div class="col-sm-9">
+       <span class="fw-bolder">Author by - </span>
+        {% for book_author in book.bookauthor_set.all %}
+             {% if forloop.last %}
+                <span class="fw-bolder"> {{ book_author.author.full_name }} </span>
+             {% else %}
+                <span class="fw-bolder"> {{ book_author.author.full_name }}, </span>
+             {% endif %}
+        {% endfor %}
+
+        <h2>Title : {{ book.title }}</h2>
+        <p class="font-monospace">Description : {{ book.description }}</p>
+        <h4>ISBN number : {{ book.isbn }}</h4>
+    </div>
+</div>
+<hr>
+<h2>Add review</h2>
+<div class="row mb-4">
+        <div class="col-6">
+            <form method="post" action="{% url 'books:reviews' book.id %}">
+                {% csrf_token %}
+
+                {{ form | crispy }}
+
+                <button class="btn btn-success">Add review</button>
+            </form>
+
+        </div>
+    </div>
+
+{% if book.bookreview_set.exists %}
+
+<h2>Review</h2>
+{% for review in book.bookreview_set.all %}
+<div class="row">
+    <div class="col-1">
+       <img class="review_pic" style="width:50px;height:50px;border-radius:50%;" src="{{ review.user.profile_picture.url }}">
+    </div>
+    <div class="col-7">
+        <a href="{% url 'users:profile' %}"><b>{{ review.user.username }}</b></a>
+
+        <span class="fw-lighter">{{ review.created_at }}</span>
+        {% if review.user == request.user %}
+
+        <a href="{% url 'books:edit' book.id review.id %}"><i class="bi bi-pen"></i></a>
+
+        <a href="{% url 'books:delete-review' book.id review.id %}"><i class="bi bi-trash"></i></a>
+        {% endif %}
+        <div>
+             {% if review.stars_given == 1 %}
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                    {% endif %}
+                    {% if review.stars_given == 2 %}
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                    {% endif %}
+                    {% if review.stars_given == 3 %}
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                    {% endif %}
+                    {% if review.stars_give == 4 %}
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style=""></i>
+                    {% endif %}
+                    {% if review.stars_given == 5 %}
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+
+                            <i class="fa fa-star" aria-hidden="true" style="color:red;"></i>
+                {% endif %}
+        </div>
+        <p class="mb-5">
+             {{ review.comment }}
+        </p>
+
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
+{% endblock %}
